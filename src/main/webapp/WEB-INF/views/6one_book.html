@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Specific book</title>
+</head>
+<body>
+<b>Book's title:</b> <td th:text="${book.getTitle() + ', year ' + book.getYear()}">book's title</td>
+<br><br>
+
+<b>Book's id:</b> <td th:text="${book.getId()}">book's id</td>
+<br><br>
+
+<table>
+    <td>
+        <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+            <input type="submit" value="Delete Book">
+        </form>
+    </td>
+
+    <td>
+        <form th:method="PUT" th:action="@{/books/{id}(id=${book.getId()})}">
+            <input type="submit" value="Update Book">
+        </form>
+    </td>
+</table>
+<br><br>
+
+<div th:if="${readerOfBook}">   <!--с помощью span можно выделить информ-ю внутри других тегов и установить свой стиль-->
+    <span>The person who possesses this book currently: </span> <span th:text="${readerOfBook.getName()}">Reader name</span>
+    <br><br>
+    <form th:method="POST" th:action="@{/books/removeBook/{id}(id=${book.getId()})}">
+        <input type="submit" value="Withdraw this book">
+    </form>
+</div>
+
+<div th:if="${allReaders}">
+    <span>This book is free so far. Would you like to give it to a specific reader ? </span>
+    <br><br>
+    <form th:method="POST" th:action="@{/books/setBook/{id}(id=${book.getId()})}">
+        <label for="reader">Choose reader for book</label>
+        <select th:object="${reader}" th:field="*{id}" id="reader">
+            <option th:each="reader: ${allReaders}" th:value="${reader.getId()}" th:text="${reader.getName()}"> </option>
+        </select>
+        <input type="submit" value="Set this book to reader">
+    </form>
+</div>
+
+</body>
+</html>

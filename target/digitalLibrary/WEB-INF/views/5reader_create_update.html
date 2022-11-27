@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reader create-update</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/readers/}" th:object="${reader}">
+    <input type="hidden" th:field="*{id}">
+    <br><br>
+
+    <label for="name">Reader's name</label>
+    <input type="text" th:field="*{name}" id="name">
+    <br><br>
+
+    <label for="age">Reader's age</label>
+    <input type="text" th:field="*{age}" id="age">
+    <br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

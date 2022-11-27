@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reader's List</title>
+</head>
+<body>
+<div th:each="allReadersVar: ${allReaders}">
+    <br>
+    <a th:href="@{/readers/{id}(id=${allReadersVar.getId()})}" th:text="${allReadersVar.getName()}">Concrete person</a>
+</div>
+<br><br>
+
+<form th:method="GET" th:action="@{/readers/new}">
+    <input type="submit" value="Add Reader">
+</form>
+
+</body>
+</html>

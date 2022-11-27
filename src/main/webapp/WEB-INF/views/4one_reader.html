@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Specific Reader</title>
+</head>
+<body>
+
+<b>Reader's name:</b> <td th:text="${reader.getName() + ', age ' + reader.getAge()}">reader's name</td>
+<br><br>
+
+<b>Reader's id:</b> <td th:text="${reader.getId()}">reader's id</td>
+<br><br>
+
+<table>
+    <td>
+        <form th:method="DELETE" th:action="@{/readers/{id}(id=${reader.getId()})}">
+            <input type="submit" value="Delete Reader">
+        </form>
+    </td>
+
+    <td>
+        <form th:method="PUT" th:action="@{/readers/{id}(id=${reader.getId()})}">
+            <input type="submit" value="Update Reader">
+        </form>
+    </td>
+</table>
+<br>
+
+<div th:if="${readerBooks.isEmpty()}">
+    <hr/>
+    <p>Reader didn't get any book yet</p>   <!--tag p определяет параграф или текстовый абзац-->
+    <hr/>                                   <!--tag hr определяет тематический разрыв в HTML-странице-->
+</div>
+
+<div th:unless="${readerBooks.isEmpty()}">
+    <hr/>
+    <b>Books in use:</b>
+    <br/>                                   <!--возврат каретки, перевод строки в то место, где этот тег находится-->
+    <table th:each="readerBooksVar: ${readerBooks}">
+        <tr th:text="${readerBooksVar.getTitle() + ', ' + readerBooksVar.getYear()}">book</tr>
+    </table>
+    <hr/>
+</div>
+
+</body>
+</html>

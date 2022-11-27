@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book create-update</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/books/}" th:object="${book}">
+    <input type="hidden" th:field="*{id}">
+<!--    <input th:object="book2" th:value="${book.getReader()}">-->
+    <br><br>
+
+    <label for="title">Book's title </label>
+    <input type="text" th:field="*{title}" id="title">
+    <br><br>
+
+    <label for="year">Book's year</label>
+    <input type="text" th:field="*{year}" id="year">
+    <br><br>
+
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
